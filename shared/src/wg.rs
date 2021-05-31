@@ -25,7 +25,7 @@ fn cmd(bin: &str, args: &[&str]) -> Result<process::Output, Error> {
     }
 }
 
-#[cfg(target_os = "macos")]
+#[cfg(any(target_os = "freebsd", target_os = "macos"))]
 pub fn set_addr(interface: &InterfaceName, addr: IpNetwork) -> Result<(), Error> {
     let real_interface =
         wgctrl::backends::userspace::resolve_tun(interface).with_str(interface.to_string())?;

@@ -15,6 +15,15 @@ pub mod wg;
 
 pub use types::*;
 
+#[cfg(target_os = "freebsd")]
+lazy_static! {
+    pub static ref CLIENT_CONFIG_DIR: &'static Path = Path::new("/usr/local/etc/innernet");
+    pub static ref CLIENT_DATA_DIR: &'static Path = Path::new("/var/db/innernet");
+    pub static ref SERVER_CONFIG_DIR: &'static Path = Path::new("/usr/local/etc/innernet-server");
+    pub static ref SERVER_DATABASE_DIR: &'static Path = Path::new("/var/db/innernet-server");
+    pub static ref REDEEM_TRANSITION_WAIT: Duration = Duration::from_secs(5);
+}
+#[cfg(not(target_os = "freebsd"))]
 lazy_static! {
     pub static ref CLIENT_CONFIG_DIR: &'static Path = Path::new("/etc/innernet");
     pub static ref CLIENT_DATA_DIR: &'static Path = Path::new("/var/lib/innernet");
